@@ -8,13 +8,18 @@ namespace Training.Plugins
         public void Execute(IServiceProvider serviceProvider)
         {
             IPluginExecutionContext context = (IPluginExecutionContext)
-            serviceProvider.GetService(typeof(IPluginExecutionContext));
+                serviceProvider.GetService(typeof(IPluginExecutionContext));
+
             Entity entity = (Entity)context.InputParameters["Target"];
-            string name = (string)entity["ita_name"];
-            if ("Test".Equals(name))
+            if (entity.Contains("its_name"))
             {
-                throw new InvalidPluginExecutionException("Cannot use this name");
+                string name = (string)entity["ita_name"];
+                if ("Test".Equals(name))
+                {
+                    throw new InvalidPluginExecutionException("Cannot use this name");
+                }
             }
+            
         }
     }
 }
